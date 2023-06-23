@@ -17,7 +17,7 @@ def fetch_data(url, headers, file_name):
     else:
         return "Error: Unable to fetch data for '{}'".format(file_name)
 
-@app.get("/berthplan")
+@main.get("/berthplan")
 async def fetch_berthplan():
     url1 = "https://api.tradlinx.com/berthplan?1687485467783"
     headers1 = {
@@ -38,7 +38,7 @@ async def fetch_berthplan():
     }
     return fetch_data(url1, headers1, "berthplan.json")
 
-@app.get("/terminalWork")
+@main.get("/terminalWork")
 async def fetch_terminalwork():
     url2 = "https://api-terminal.tradlinx.com/terminalWork?1687485467214"
     headers2 = {
