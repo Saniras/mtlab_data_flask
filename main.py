@@ -63,8 +63,11 @@ def job():
     schedule.run_pending()
     time.sleep(1)
 
-schedule.every().day.at("08:00").do(job)  # Morning time
-schedule.every().day.at("20:00").do(job)  # Night time
+schedule.every().day.at("07:00").do(job) 
+schedule.every().day.at("12:00").do(job)  
+schedule.every().day.at("16:00").do(job) 
+schedule.every().day.at("20:00").do(job)
+schedule.every().day.at("03:00").do(job)
 
 if __name__ == '__main__':
     import uvicorn
