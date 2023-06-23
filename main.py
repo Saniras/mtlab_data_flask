@@ -19,7 +19,7 @@ def fetch_data(url, headers):
     else:
         return None
 
-@app.get("/berthplan")
+@app.get("/berth")
 async def fetch_berthplan():
     url1 = "https://api.tradlinx.com/berthplan?1687485467783"
     headers1 = {
@@ -41,7 +41,7 @@ async def fetch_berthplan():
      data = fetch_data(url1, headers1)
     return data
 
-@app.get("/terminalWork")
+@app.get("/terminal")
 async def fetch_terminalwork():
     url2 = "https://api-terminal.tradlinx.com/terminalWork?1687485467214"
     headers2 = {
@@ -67,10 +67,16 @@ def job():
     schedule.run_pending()
     time.sleep(1)
 
-schedule.every().day.at("07:00").do(job) 
+schedule.every().day.at("07:00").do(job)
 schedule.every().day.at("12:00").do(job)  
-schedule.every().day.at("16:00").do(job) 
+schedule.every().day.at("16:00").do(job)
+schedule.every().day.at("17:00").do(job)
+schedule.every().day.at("18:00").do(job)
+schedule.every().day.at("19:00").do(job) 
 schedule.every().day.at("20:00").do(job)
+schedule.every().day.at("21:00").do(job)
+schedule.every().day.at("22:00").do(job)
+schedule.every().day.at("23:00").do(job)
 schedule.every().day.at("03:00").do(job)
 
 if __name__ == '__main__':
