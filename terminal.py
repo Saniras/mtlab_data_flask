@@ -5,7 +5,7 @@ import json
 
 from fastapi import FastAPI
 
-terminal = FastAPI()
+app = FastAPI()
 
 @terminal.get('/')
 def fetch_data():
