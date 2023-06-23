@@ -52,8 +52,3 @@ def job():
 
 schedule.every().day.at("08:00").do(fetch_data)  
 schedule.every().day.at("20:00").do(fetch_data)
-
-if __name__ == '__main__':
-    import uvicorn
-
-    uvicorn.run(terminal, host="0.0.0.0", port=5000)
