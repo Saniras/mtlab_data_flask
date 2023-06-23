@@ -20,7 +20,7 @@ def fetch_data(url, headers):
         return None
 
 @app.get("/berth")
-async def fetch_berthplan():
+async def fetch_berth():
     url1 = "https://api.tradlinx.com/berthplan?1687485467783"
     headers1 = {
        "Accept": "application/json, text/plain, */*",
@@ -42,7 +42,7 @@ async def fetch_berthplan():
     return data
 
 @app.get("/terminal")
-async def fetch_terminalwork():
+async def fetch_terminal():
     url2 = "https://api-terminal.tradlinx.com/terminalWork?1687485467214"
     headers2 = {
        "Accept": "application/json, text/plain, */*",
