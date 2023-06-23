@@ -7,15 +7,20 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+@app.get("/items/")
+async def read_items():
+    return [{"name": "Foo"}]
+    
+
 def fetch_data(url, headers, file_name):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
         with open(file_name, "w") as file:
             json.dump(data, file)
-        return "Fetch data completed for '{}'".format(file_name)
+        return "Fetch data completed"
     else:
-        return "Error: Unable to fetch data for '{}'".format(file_name)
+        return "Error: Unable to fetch data"
 
 @app.get("/berth")
 async def fetch_berth():
