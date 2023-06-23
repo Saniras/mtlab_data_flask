@@ -12,7 +12,7 @@ async def read_items():
     return [{"name": "Foo"}]
     
 
-def fetch_data(url, headers, file_name):
+def fetch_data(url, headers):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
