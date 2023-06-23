@@ -7,15 +7,13 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-def fetch_data(url, headers, file_name):
+def fetch_data(url, headers):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        with open(file_name, "w") as file:
-            json.dump(data, file)
-        return "Fetch data completed for '{}'".format(file_name)
+        return data
     else:
-        return "Error: Unable to fetch data for '{}'".format(file_name)
+        return None
 
 @app.get("/berthplan")
 async def fetch_berthplan():
@@ -36,7 +34,8 @@ async def fetch_berthplan():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "X-Requested-With": "XMLHttpRequest"
     }
-    return fetch_data(url1, headers1, "berthplan.json")
+     data = fetch_data(url1, headers1)
+    return data
 
 @app.get("/terminalWork")
 async def fetch_terminalwork():
@@ -57,7 +56,8 @@ async def fetch_terminalwork():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "X-Requested-With": "XMLHttpRequest"
     }
-    return fetch_data(url2, headers2, "terminalwork.json")
+    data = fetch_data(url2, headers2)
+    return data
 
 def job():
     schedule.run_pending()
