@@ -7,13 +7,15 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-def fetch_data(url, headers):
+def fetch_data(url, headers, file_name):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        return data
+        with open(file_name, "w") as file:
+            json.dump(data, file)
+        return "Fetch data completed for '{}'".format(file_name)
     else:
-        return None
+        return "Error: Unable to fetch data for '{}'".format(file_name)
 
 @app.get("/berth")
 async def fetch_berth():
@@ -34,8 +36,7 @@ async def fetch_berth():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "X-Requested-With": "XMLHttpRequest"
     }
-         data = fetch_data(url1, headers1)
-        return data
+    return fetch_data(url1, headers1)
 
 @app.get("/terminal")
 async def fetch_terminal():
@@ -56,26 +57,17 @@ async def fetch_terminal():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "X-Requested-With": "XMLHttpRequest"
     }
-        data = fetch_data(url2, headers2)
-        return data
+    return fetch_data(url2, headers2)
 
 def job():
     schedule.run_pending()
     time.sleep(1)
 
-schedule.every().day.at("07:00").do(job)
-schedule.every().day.at("12:00").do(job)  
-schedule.every().day.at("16:00").do(job)
-schedule.every().day.at("17:00").do(job)
-schedule.every().day.at("18:00").do(job)
-schedule.every().day.at("19:00").do(job) 
-schedule.every().day.at("20:00").do(job)
-schedule.every().day.at("21:00").do(job)
-schedule.every().day.at("22:00").do(job)
-schedule.every().day.at("23:00").do(job)
-schedule.every().day.at("03:00").do(job)
+    schedule.every().day.at("08:00").do(job)
+    schedule.every().day.at("10:00").do(job)
+    schedule.every().day.at("20:00").do(job)
 
 if __name__ == '__main__':
     import uvicorn
 
-    uvicorn.run(main, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
