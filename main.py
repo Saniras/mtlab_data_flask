@@ -16,11 +16,9 @@ def fetch_data(url, headers):
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        with open(file_name, "w") as file:
-            json.dump(data, file)
-        return "Fetch data completed"
+        return data
     else:
-        return "Error: Unable to fetch data"
+        return None
 
 @app.get("/berth")
 async def fetch_berth():
