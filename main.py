@@ -34,8 +34,8 @@ async def fetch_berth():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "X-Requested-With": "XMLHttpRequest"
     }
-     data = fetch_data(url1, headers1)
-    return data
+         data = fetch_data(url1, headers1)
+        return data
 
 @app.get("/terminal")
 async def fetch_terminal():
@@ -56,8 +56,8 @@ async def fetch_terminal():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
         "X-Requested-With": "XMLHttpRequest"
     }
-    data = fetch_data(url2, headers2)
-    return data
+        data = fetch_data(url2, headers2)
+        return data
 
 def job():
     schedule.run_pending()
